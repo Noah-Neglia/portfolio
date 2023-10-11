@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":  "cd portfolio-client && npm install && npm run build",
-    "heroku-postbuild": "cd portfolio-server && npm install && node server.js"
+    "heroku-postbuild": "node portfolio-server/server.js"
   },
   "keywords": [],
   "author": "",
