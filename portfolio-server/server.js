@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../portfolio-client/build')));
+app.use(express.static(path.join(__dirname, '../portfolio-client/build/index.html')));
 
 const transporter = nodemailer.createTransport({
     service: 'outlook',
