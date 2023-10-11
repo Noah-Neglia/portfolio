@@ -4,12 +4,13 @@ const cors = require('cors');
 const path = require('path'); // Added to handle file paths
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app
+console.log('Serving static files from:', path.join(__dirname, '../client/build'));
 app.use(express.static(path.join(__dirname, '../portfolio-client/build')));
 
 const transporter = nodemailer.createTransport({
