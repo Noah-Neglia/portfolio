@@ -1,12 +1,16 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path'); // Added to handle file paths
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());  // Add this line to use express's built-in middleware to parse JSON bodies
+app.use(express.json());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../portfolio-client/build')));
 
 const transporter = nodemailer.createTransport({
     service: 'outlook',
@@ -20,8 +24,8 @@ app.post('/send-email', (req, res) => {
   const { name, organization, email, message } = req.body;
   
   const mailOptions = {
-    from: process.env.EMAIL_USER,  // Updated to use environment variable
-    to: process.env.EMAIL_RECEIVER,  // Updated to use environment variable, make sure to define it
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_RECEIVER,
     replyTo: email,
     subject: `Message from ${name} at ${organization}`,
     text: message
@@ -33,6 +37,12 @@ app.post('/send-email', (req, res) => {
     }
     res.status(200).send('Email sent: ' + info.response);
   });
+});
+
+// The "catchall" handler: for any request that doesn't
+// match one directly above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(port, () => {
