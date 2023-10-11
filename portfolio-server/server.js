@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path'); // Added to handle file paths
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
