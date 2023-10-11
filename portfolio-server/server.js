@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../portfolio-client/build/index.html')));
+app.use(express.static(path.join(__dirname, '../portfolio-client/build')));
 
 const transporter = nodemailer.createTransport({
     service: 'outlook',
@@ -42,7 +42,7 @@ app.post('/send-email', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one directly above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../portfolio-client/build', 'index.html'));
 });
 
 app.listen(port, () => {
