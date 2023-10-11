@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":  "cd portfolio-client && npm install && npm run build",
-    "heroku-postbuild": "node portfolio-server/server.js"
+    "start": "node portfolio-server/server.js",
+    "heroku-postbuild": "cd portfolio-client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
